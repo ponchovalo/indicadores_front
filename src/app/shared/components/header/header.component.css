@@ -1,0 +1,40 @@
+.container {
+    color: #E8E8E8;
+    height: 100%;
+    background-color: #192231;
+    padding: 0;
+    margin: 0;
+}
+.content_logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+.content_title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+}
+
+.content_user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.content_action {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+img.logo {
+    width: 95px;
+}
