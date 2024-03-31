@@ -13,7 +13,7 @@
 
         <div class="flex-auto">
           <label for="buttondisplay" class="font-bold block mb-2"> Turno: </label>
-          <p-dropdown formControlName="selectedCity"
+          <p-dropdown
                       [options]="workshifts"
                       optionLabel="name"
                       placeholder="Seleccione Turno"
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <p-dialog header="Nueva Actividad" [(visible)]="dialogVisible" [style]="{width: '80vw'}">
+    <p-dialog header="Nueva Actividad" [(visible)]="dialogVisible" [style]="{width: '60vw'}">
       <ticket-reg-new-activity></ticket-reg-new-activity>
     </p-dialog>
 

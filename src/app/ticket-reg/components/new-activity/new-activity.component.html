@@ -1,17 +1,96 @@
-
-
 <!-- Buscar por actividad-->
-<div class="grid">
-  <div class="col-3 card flex flex-wrap gap-8 p-fluid">
-    <div class="flex-auto">
-      <label for="buttondisplay" class="font-bold block mb-2"> Tipo de Actividad: </label>
-      <p-dropdown formControlName="activityType"
-                  appendTo="body"
+<div class="formgrid grid mt-4 mb-3">
+  <div class="field col-1 p-fluid"></div>
+  <div class="field col-6 p-fluid">
+    <label for="buttondisplay" class="font-bold block mb-2"> Tipo de Actividad: </label>
+      <p-dropdown appendTo="body"
                   [options]="activityTypes"
                   [(ngModel)]="activityType"
                   placeholder="Seleccione Actividad"
+                  (ngModelChange)="activityTypeChange()"
                   ></p-dropdown>
-    </div>
   </div>
-
 </div>
+
+<div *ngIf="activityType === 'ACTIVIDADES ADMINISTRATIVAS'">
+  <form #form="ngForm" [formGroup]="activityForm">
+
+    <div class="formgrid grid mb-3 flex justify-content-center">
+      <div class="field col-6 p-fluid">
+        <label for="buttondisplay" class="font-bold block mb-2"> Descripcion de la actividad: </label>
+        <p-dropdown formControlName="ticket_description"
+                    appendTo="body"
+                    [options]="baseActivities"
+                    optionLabel="ticket_description"
+                    placeholder="Seleccione Descripcion del Ticket"
+                    [filter]="true"
+                    ></p-dropdown>
+      </div>
+
+      <div class="field col-2">
+        <label for="icondisplay" class="font-bold block mb-2"> H. Inicial: </label>
+        <input type="text" pInputText class="w-full" formControlName="initial_time"/>
+      </div>
+
+      <div class="field col-2">
+        <label for="icondisplay" class="font-bold block mb-2"> H. Final: </label>
+          <input type="text" pInputText class="w-full" formControlName="final_time"/>
+      </div>
+
+    </div>
+
+    <div class="formgrid grid mb-3 flex justify-content-center">
+
+      <div class="field col-2">
+        <label for="icondisplay" class="font-bold block mb-2"> T.M. Comida: </label>
+        <input type="text" pInputText class="w-full" formControlName="time_out_food"/>
+      </div>
+
+      <div class="field col-2">
+        <label for="icondisplay" class="font-bold block mb-2"> T.M. Traslados: </label>
+          <input type="text" pInputText class="w-full" formControlName="time_out_transfer"/>
+      </div>
+
+      <div class="field col-2">
+        <label for="icondisplay" class="font-bold block mb-2"> T.M. Accesos: </label>
+        <input type="text" pInputText class="w-full" formControlName="time_out_access"/>
+      </div>
+
+      <div class="field col-2">
+        <label for="icondisplay" class="font-bold block mb-2"> T.M. Codigo: </label>
+          <input type="text" pInputText class="w-full" formControlName="time_out_code"/>
+      </div>
+
+      <div class="field col-2">
+        <label for="icondisplay" class="font-bold block mb-2"> T.M. Almacen: </label>
+          <input type="text" pInputText class="w-full" formControlName="time_out_store"/>
+      </div>
+
+    </div>
+
+    <div class="formgrid grid mb-3 flex justify-content-center">
+
+      <div class="field col-5">
+        <label for="icondisplay" class="font-bold block mb-2"> Ubicacion: </label>
+          <input type="text" pInputText class="w-full" formControlName="area_name"/>
+      </div>
+
+      <div class="field col-5">
+        <label for="icondisplay" class="font-bold block mb-2"> Unidad Funcional: </label>
+          <input type="text" pInputText class="w-full" formControlName="unit_name"/>
+      </div>
+
+    </div>
+
+    <div class="formgrid grid mb-3 flex justify-content-center">
+
+      <div class="field col-10 flex justify-content-end">
+          <p-button (onClick)="activityTypeChange()">Guardar</p-button>
+      </div>
+
+    </div>
+
+  </form>
+</div>
+
+
