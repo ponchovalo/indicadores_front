@@ -1,15 +1,52 @@
 <div class="grid">
     <div class="col-12">
-        <h2 class="pl-3">Registro de actividades</h2>
+        <h2>Registro de actividades</h2>
     </div>
-    <div class="col-12">
-        <div class="grid">
-            <div class="col-4">
-                <span class="pl-3">Fecha</span>
-            </div>
-            <div class="col-4">
-                Turno
-            </div>
+
+    <div class="seccion">
+      <div class="col-10 card flex flex-wrap gap-8 p-fluid">
+
+        <div class="flex-auto">
+            <label for="icondisplay" class="font-bold block mb-2"> Fecha: </label>
+            <p-calendar [(ngModel)]="date" [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay"></p-calendar>
         </div>
+
+        <div class="flex-auto">
+          <label for="buttondisplay" class="font-bold block mb-2"> Turno: </label>
+          <p-dropdown formControlName="selectedCity"
+                      [options]="workshifts"
+                      optionLabel="name"
+                      placeholder="Seleccione Turno"
+                      ></p-dropdown>
+        </div>
+
+        <div class="flex-auto align-content-end">
+            <p-button icon="pi pi-plus"
+                      class="add-button"
+                      label="Agregar Nueva Actividad"
+                      [outlined]="true"
+                      severity="success"
+                      (onClick)="showDialogNewActivity()"
+                      ></p-button>
+        </div>
+      </div>
     </div>
+
+    <p-dialog header="Nueva Actividad" [(visible)]="dialogVisible" [style]="{width: '80vw'}">
+      <ticket-reg-new-activity></ticket-reg-new-activity>
+    </p-dialog>
+
+    <div class="seccion">
+      <div class="col-10">
+        <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+      </div>
+      <div class="col-12">
+        <ticket-reg-activity-table></ticket-reg-activity-table>
+      </div>
+
+    </div>
+
+
+
+
 </div>

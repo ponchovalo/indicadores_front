@@ -7,6 +7,13 @@ import { MessagesModule } from 'primeng/messages';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+
 
 
 
@@ -17,7 +24,13 @@ import { ButtonModule } from 'primeng/button';
     ToastModule,
     CardModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    CalendarModule,
+    DropdownModule,
+    IconFieldModule,
+    InputIconModule,
+    TableModule,
+    DialogModule
   ],
   exports: [
     ToastModule,
@@ -25,7 +38,13 @@ import { ButtonModule } from 'primeng/button';
     MessagesModule,
     CardModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    CalendarModule,
+    DropdownModule,
+    IconFieldModule,
+    InputIconModule,
+    TableModule,
+    DialogModule
   ]
 })
 export class PrimengModule { }

@@ -21,7 +21,7 @@ import { MessageService } from 'primeng/api';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    PrimengModule
+    PrimengModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

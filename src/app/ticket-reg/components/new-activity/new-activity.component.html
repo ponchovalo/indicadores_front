@@ -1,0 +1,17 @@
+
+
+<!-- Buscar por actividad-->
+<div class="grid">
+  <div class="col-3 card flex flex-wrap gap-8 p-fluid">
+    <div class="flex-auto">
+      <label for="buttondisplay" class="font-bold block mb-2"> Tipo de Actividad: </label>
+      <p-dropdown formControlName="activityType"
+                  appendTo="body"
+                  [options]="activityTypes"
+                  [(ngModel)]="activityType"
+                  placeholder="Seleccione Actividad"
+                  ></p-dropdown>
+    </div>
+  </div>
+
+</div>
