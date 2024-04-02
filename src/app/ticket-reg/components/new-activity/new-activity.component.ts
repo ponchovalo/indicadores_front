@@ -1,7 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { DefaultValueAccessor, FormBuilder, FormGroup } from '@angular/forms';
 import { TicketRegService } from '../../services/ticket-reg.service';
 import { BaseActivity } from '../../interfaces/base_activity.interface';
+import { Party } from '../../interfaces/parties.interface';
+import { Device } from '../../interfaces/device.interface';
 
 @Component({
   selector: 'ticket-reg-new-activity',
@@ -13,32 +15,80 @@ export class NewActivityComponent implements OnInit {
   private fb = inject(FormBuilder);
   private ticketRegService = inject(TicketRegService)
 
-  activityType: string = "PREVENTIVO"
+  //Tipo de actividade seleccionada
+  selectedActivityType: string = "";
   activityTypes: string[] = ['PREVENTIVO','NO PLANIFICADO','ACTIVIDADES ADMINISTRATIVAS']
+
+  selectedParty?: Party;
+  parties: Party[] = []
+
+  selectedDevice?: Device;
+  devices: Device[] = []
 
   baseActivities: BaseActivity[] =[];
 
   public activityForm: FormGroup = this.fb.group({
-    ticket_description: [''],
+    baseActivity: [''], 
     initial_time:[''],
     final_time:[''],
-    time_out_food:[''],
-    time_out_transfer:[''],
-    time_out_access:[''],
-    time_out_code:[''],
-    time_out_store:[''],
-    area_name:[''],
+    time_out_food:['00:00'],
+    time_out_transfer:['00:00'],
+    time_out_access:['00:00'],
+    time_out_code:['00:00'],
+    time_out_store:['00:00'],
+    area_name:[''], 
     unit_name:['']
   })
 
   ngOnInit(): void {
   };
 
-  activityTypeChange(){
-    this.ticketRegService.getTicketDescription(this.activityType).subscribe( res => {
-      this.baseActivities = res;
-      console.log(this.baseActivities)
-    })
+  onActivityTypeChange(){
+    switch (this.selectedActivityType){
+      case 'ACTIVIDADES ADMINISTRATIVAS': 
+        this.ticketRegService.getTicketDescription(this.selectedActivityType)
+          .subscribe( res => {
+            this.baseActivities = res;
+            console.log(this.baseActivities)
+        })
+        break
+      case 'NO PLANIFICADO':
+        this.ticketRegService.getParties()
+          .subscribe(res => {
+            this.parties = res;
+          })
+        console.log(this.selectedActivityType)
+        break
+      default:
+        return
+    }
+  }
+
+  onPartyChange(){
+    this.ticketRegService.getDeviceForParty(this.selectedParty!.party_name)
+      .subscribe(res => {
+        this.devices = res;
+      })
+  }
+
+  onDeviceChange(){
+    console.log(this.selectedDevice)
+  }
+
+  saveActivity(){
+    const baseActivitySelected: BaseActivity = this.activityForm.value.baseActivity;
+    console.log(this.activityForm)
+    console.log(this.activityForm.value)
+    console.log(baseActivitySelected.problem_description)
+    this.activityForm.reset();
+  }
+
+  resetValues(){
+    this.activityForm.controls['time_out_food'].setValue('00:00');
+    this.activityForm.controls['time_out_transfer'].setValue('00:00');
+    this.activityForm.controls['time_out_access'].setValue('00:00');
+    this.activityForm.controls['time_out_code'].setValue('00:00');
+    this.activityForm.controls['time_out_store'].setValue('00:00');
   }
 
 
