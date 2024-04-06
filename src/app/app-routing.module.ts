@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./ticket-reg/ticket-reg.module').then(m => m.TicketRegModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'auth'
   }
 ];
 

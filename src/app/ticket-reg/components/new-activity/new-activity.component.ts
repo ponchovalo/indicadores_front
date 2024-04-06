@@ -4,6 +4,7 @@ import { TicketRegService } from '../../services/ticket-reg.service';
 import { BaseActivity } from '../../interfaces/base_activity.interface';
 import { Party } from '../../interfaces/parties.interface';
 import { Device } from '../../interfaces/device.interface';
+import { Area } from '../../interfaces/area.interface';
 
 @Component({
   selector: 'ticket-reg-new-activity',
@@ -27,6 +28,9 @@ export class NewActivityComponent implements OnInit {
 
   baseActivities: BaseActivity[] =[];
 
+  selectedArea?: Area;
+  areas: Area[] = [];
+
   public activityForm: FormGroup = this.fb.group({
     baseActivity: [''], 
     initial_time:[''],
@@ -36,11 +40,12 @@ export class NewActivityComponent implements OnInit {
     time_out_access:['00:00'],
     time_out_code:['00:00'],
     time_out_store:['00:00'],
-    area_name:[''], 
+    area:[null], 
     unit_name:['']
   })
 
   ngOnInit(): void {
+    
   };
 
   onActivityTypeChange(){
@@ -50,14 +55,16 @@ export class NewActivityComponent implements OnInit {
           .subscribe( res => {
             this.baseActivities = res;
             console.log(this.baseActivities)
-        })
+        });
+        this.getAreas();
         break
       case 'NO PLANIFICADO':
         this.ticketRegService.getParties()
           .subscribe(res => {
             this.parties = res;
-          })
-        console.log(this.selectedActivityType)
+            console.log(this.parties)
+          });
+        this.getAreas();
         break
       default:
         return
@@ -73,6 +80,18 @@ export class NewActivityComponent implements OnInit {
 
   onDeviceChange(){
     console.log(this.selectedDevice)
+  }
+
+  getAreas(){
+    this.ticketRegService.getArea()
+      .subscribe(res => {
+        this.areas = res;
+        console.log(this.areas)
+      })
+  }
+
+  onAreaChange(){
+    console.log(this.activityForm.value.area.area_name)
   }
 
   saveActivity(){

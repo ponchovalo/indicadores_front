@@ -6,6 +6,7 @@ import { BaseActivity } from '../interfaces/base_activity.interface';
 import { Activity } from '../interfaces/activity.interface';
 import { Party } from '../interfaces/parties.interface';
 import { Device } from '../interfaces/device.interface';
+import { Area } from '../interfaces/area.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,11 @@ export class TicketRegService {
     const url = `${this.baseUrl}/activity-base/activity-type`;
     const body = {activity_type}
     return this.http.post<BaseActivity[]>(url, body)
+  }
+
+  getArea(): Observable<Area[]>{
+    const url = `${this.baseUrl}/location/areas`;
+    return this.http.get<Area[]>(url)
   }
 
 

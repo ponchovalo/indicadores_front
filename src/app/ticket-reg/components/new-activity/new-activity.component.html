@@ -109,9 +109,16 @@
 
     <div class="formgrid grid mb-3 flex justify-content-center">
 
-      <div class="field col-5">
-        <label for="icondisplay" class="font-bold block mb-2"> Ubicacion: </label>
-          <input type="text" pInputText class="w-full" formControlName="area_name"/>
+      <div class="field col-5 p-fluid">
+        <label for="buttondisplay" class="font-bold block mb-2"> Area: </label>
+          <p-dropdown formControlName="area"
+                      appendTo="body"
+                      [options]="areas"
+                      optionLabel="location" 
+                      placeholder="Seleccione Ubicacion"
+                      (ngModelChange)="onAreaChange()"
+                      [filter]="true"
+                      ></p-dropdown>
       </div>
 
       <div class="field col-5">

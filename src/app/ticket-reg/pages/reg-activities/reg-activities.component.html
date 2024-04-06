@@ -33,7 +33,7 @@
     </div>
 
     <p-dialog header="Nueva Actividad" [(visible)]="dialogVisible" [style]="{width: '60vw'}">
-      <ticket-reg-new-activity></ticket-reg-new-activity>
+      <ticket-reg-new-activity *ngIf="dialogVisible"></ticket-reg-new-activity>
     </p-dialog>
 
     <div class="seccion">
