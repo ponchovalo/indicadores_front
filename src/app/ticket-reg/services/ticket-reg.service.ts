@@ -7,6 +7,7 @@ import { Activity } from '../interfaces/activity.interface';
 import { Party } from '../interfaces/parties.interface';
 import { Device } from '../interfaces/device.interface';
 import { Area } from '../interfaces/area.interface';
+import { Units } from '../interfaces/units.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,12 @@ export class TicketRegService {
   getArea(): Observable<Area[]>{
     const url = `${this.baseUrl}/location/areas`;
     return this.http.get<Area[]>(url)
+  }
+
+  getUnits(area_id: string): Observable<Units[]> {
+    const url = `${this.baseUrl}/location/units`;
+    const body = {area_id}
+    return this.http.post<Units[]>(url, body)
   }
 
 
