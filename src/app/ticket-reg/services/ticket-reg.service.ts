@@ -52,6 +52,7 @@ export class TicketRegService {
     const body = {area_id}
     return this.http.post<Units[]>(url, body)
   }
+  
 
 
 }

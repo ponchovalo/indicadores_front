@@ -5,6 +5,7 @@ import { BaseActivity } from '../../interfaces/base_activity.interface';
 import { Party } from '../../interfaces/parties.interface';
 import { Device } from '../../interfaces/device.interface';
 import { Area } from '../../interfaces/area.interface';
+import { Units } from '../../interfaces/units.interface';
 
 @Component({
   selector: 'ticket-reg-new-activity',
@@ -30,6 +31,8 @@ export class NewActivityComponent implements OnInit {
 
   selectedArea?: Area;
   areas: Area[] = [];
+
+  units: Units[] = [];
 
   public activityForm: FormGroup = this.fb.group({
     baseActivity: [''], 
@@ -90,8 +93,16 @@ export class NewActivityComponent implements OnInit {
       })
   }
 
+  getUnits(area_id: string){
+    this.ticketRegService.getUnits(area_id)
+      .subscribe(res => {
+        this.units = res;
+        console.log(this.units)
+      })
+  }
+
   onAreaChange(){
-    console.log(this.activityForm.value.area.area_name)
+    this.getUnits(this.selectedArea!.area_id)
   }
 
   saveActivity(){
