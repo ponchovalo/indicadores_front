@@ -29,7 +29,7 @@ export class NewActivityComponent implements OnInit {
 
   baseActivities: BaseActivity[] =[];
 
-  selectedArea?: Area;
+  selectedArea!: Area;
   areas: Area[] = [];
 
   units: Units[] = [];
@@ -95,14 +95,15 @@ export class NewActivityComponent implements OnInit {
 
   getUnits(area_id: string){
     this.ticketRegService.getUnits(area_id)
-      .subscribe(res => {
-        this.units = res;
+      .subscribe( (units) => {
+        this.units = units;
+        console.log(units[0])
         console.log(this.units)
       })
   }
 
   onAreaChange(){
-    this.getUnits(this.selectedArea!.area_id)
+    this.getUnits(this.activityForm.value.area.area_id)
   }
 
   saveActivity(){
