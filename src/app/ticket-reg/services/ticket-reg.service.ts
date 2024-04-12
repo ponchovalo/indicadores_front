@@ -47,10 +47,10 @@ export class TicketRegService {
     return this.http.get<Area[]>(url)
   }
 
-  getUnits(area_id: string): Observable<Units[]> {
+  getUnits(area_id: string): Observable<Units> {
     const url = `${this.baseUrl}/location/units`;
     const body = {area_id}
-    return this.http.post<Units[]>(url, body)
+    return this.http.post<Units>(url, body)
   }
   
 

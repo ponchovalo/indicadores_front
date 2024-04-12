@@ -32,7 +32,7 @@ export class NewActivityComponent implements OnInit {
   selectedArea!: Area;
   areas: Area[] = [];
 
-  units: Units[] = [];
+  units?: Units;
 
   public activityForm: FormGroup = this.fb.group({
     baseActivity: [''], 
@@ -44,7 +44,7 @@ export class NewActivityComponent implements OnInit {
     time_out_code:['00:00'],
     time_out_store:['00:00'],
     area:[null], 
-    unit_name:['']
+    unit:[null]
   })
 
   ngOnInit(): void {
@@ -95,10 +95,9 @@ export class NewActivityComponent implements OnInit {
 
   getUnits(area_id: string){
     this.ticketRegService.getUnits(area_id)
-      .subscribe( (units) => {
-        this.units = units;
-        console.log(units[0])
-        console.log(this.units)
+      .subscribe( units => {
+        this.units = units
+        console.log(this.units.units)
       })
   }
 
@@ -120,6 +119,10 @@ export class NewActivityComponent implements OnInit {
     this.activityForm.controls['time_out_access'].setValue('00:00');
     this.activityForm.controls['time_out_code'].setValue('00:00');
     this.activityForm.controls['time_out_store'].setValue('00:00');
+  }
+
+  printUnit(){
+    console.log(this.activityForm.value)
   }
 
 

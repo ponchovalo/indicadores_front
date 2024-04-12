@@ -110,7 +110,7 @@
     <div class="formgrid grid mb-3 flex justify-content-center">
 
       <div class="field col-5 p-fluid">
-        <label for="buttondisplay" class="font-bold block mb-2"> Area: </label>
+        <label for="buttondisplay" class="font-bold block mb-2"> Area Funcional: </label>
           <p-dropdown formControlName="area"
                       appendTo="body"
                       [options]="areas"
@@ -121,10 +121,18 @@
                       ></p-dropdown>
       </div>
 
-      <div class="field col-5">
-        <label for="icondisplay" class="font-bold block mb-2"> Unidad Funcional: </label>
-          <input type="text" pInputText class="w-full" formControlName="unit_name"/>
+      <div class="field col-5 p-fluid">
+        <label for="buttondisplay" class="font-bold block mb-2"> Unidad Funcional: </label>
+          <p-dropdown formControlName="unit"
+                      appendTo="body"
+                      [options]="units?.units"
+                      optionLabel="unit_name" 
+                      placeholder="Seleccione Ubicacion"
+                      (ngModelChange)="printUnit()"
+                      [filter]="true"
+                      ></p-dropdown>
       </div>
+
 
     </div>
 
