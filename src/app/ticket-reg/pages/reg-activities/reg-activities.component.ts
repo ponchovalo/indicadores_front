@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Message } from 'primeng/api';
 import { Activity } from '../../interfaces/activity.interface';
 import { Workshift } from '../../interfaces/workshift.interface';
+import { TicketRegService } from '../../services/ticket-reg.service';
 
 @Component({
   selector: 'app-reg-activities',
@@ -12,9 +13,10 @@ export class RegActivitiesComponent implements OnInit {
 
   //####   Variables Locales/Globales del Componente ##########//
   dialogVisible: boolean = false;
-  date: Date | null = null;
+  date?: Date;
   activities: Activity[] = [];
   messages: Message[] = [];
+  selectedWorkshift?: Workshift;
   workshifts: Workshift[] = [
     {
       id: 1,
@@ -33,17 +35,31 @@ export class RegActivitiesComponent implements OnInit {
     }
   ]
 
-  //####  Ciclo inicial ##########//
+  private ticketRegService = inject(TicketRegService)
+
+  //#####  Ciclo inicial #####//
   ngOnInit(): void {
     this.date = new Date();
     this.messages = [{ severity: 'warn', summary: '', detail: 'Aun no hay regitros este dia' }];
+
+    //-- Llamada a cargar actividades del dia --//
+    this.getAllActivitiesDay(this.date)
+
   }
 
-  //####  Funciones del componente ##########//
-
+  //#####  Funciones del componente #####//
   //--Abrir Dialogo --//
   showDialogNewActivity() {
     this.dialogVisible = true;
-}
+  }
+
+  //-- Llenado de tabla de actividades --//
+  getAllActivitiesDay(date: Date): void{
+    this.ticketRegService.getActivities(date)
+      .subscribe(res => {
+        console.log(res)
+      })
+    //--TODO: Cambiar inicializar workshift--//
+  }
 
 }

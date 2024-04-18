@@ -25,6 +25,13 @@ export class TicketRegService {
     return this._activities;
   }
 
+  //-- Obtener Actividades --//
+  getActivities(date: Date): Observable<Activity[]>{
+    const url = `${this.baseUrl}/activities/forday`;
+    const body = {date}
+    return this.http.post<Activity[]>(url, body)
+  }
+
   getParties():Observable<Party[]>{
     const url = `${this.baseUrl}/parties`;
     return this.http.get<Party[]>(url);
