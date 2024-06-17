@@ -4,30 +4,40 @@
     </div>
 
     <div class="seccion">
-      <div class="col-10 card flex flex-wrap gap-8 p-fluid">
+      <div class="col-12 card flex justify-content-around">
 
-        <div class="flex-auto">
-            <label for="icondisplay" class="font-bold block mb-2"> Fecha: </label>
-            <p-calendar [(ngModel)]="date" [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay"></p-calendar>
+        <div class="col-12 md:col-3 p-fluid">
+            <label for="date" class="font-bold block mb-2"> Fecha: </label>
+            <p-calendar 
+                      [(ngModel)]="date"
+                      dateFormat="dd/mm/yy" 
+                      [iconDisplay]="'input'" 
+                      [showIcon]="true" 
+                      inputId="date"
+                      (ngModelChange)="getActivitiesOnChangeDate()"
+                      ></p-calendar>
         </div>
 
-        <div class="flex-auto">
+        <div class="col-12 md:col-3 p-fluid">
           <label for="buttondisplay" class="font-bold block mb-2"> Turno: </label>
           <p-dropdown
                       [options]="workshifts"
+                      [(ngModel)]="selectedWorkshift"
                       optionLabel="name"
                       placeholder="Seleccione Turno"
                       ></p-dropdown>
         </div>
 
-        <div class="flex-auto align-content-end">
+        <div class="col-12 md:col-3 p-fluid align-content-end">
+        
             <p-button icon="pi pi-plus"
-                      class="add-button"
-                      label="Agregar Nueva Actividad"
-                      [outlined]="true"
-                      severity="success"
-                      (onClick)="showDialogNewActivity()"
-                      ></p-button>
+                    class="add-button"
+                    label="Agregar Nueva Actividad"
+                    [outlined]="true"
+                    severity="success"
+                    (onClick)="showDialogNewActivity()"
+                    ></p-button>
+         
         </div>
       </div>
     </div>

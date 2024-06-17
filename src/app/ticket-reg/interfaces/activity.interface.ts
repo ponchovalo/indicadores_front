@@ -20,5 +20,6 @@ export interface Activity {
   device_name: string;
   party_name: string;
   party_description: string;
+  user_workshift: string;
 
 }

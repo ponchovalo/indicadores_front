@@ -16,7 +16,7 @@ export class RegActivitiesComponent implements OnInit {
   date?: Date;
   activities: Activity[] = [];
   messages: Message[] = [];
-  selectedWorkshift?: Workshift;
+  selectedWorkshift?: Workshift | null;
   workshifts: Workshift[] = [
     {
       id: 1,
@@ -24,12 +24,12 @@ export class RegActivitiesComponent implements OnInit {
       working_hours: '08:00 - 17:00'
     },
     {
-      id: 1,
+      id: 2,
       name: 'GUARDIA TA',
       working_hours: '08:00 - 20:00'
     },
     {
-      id: 1,
+      id: 3,
       name: 'NOCTURNO',
       working_hours: '20:00 - 08:00'
     }
@@ -55,11 +55,24 @@ export class RegActivitiesComponent implements OnInit {
 
   //-- Llenado de tabla de actividades --//
   getAllActivitiesDay(date: Date): void{
+    console.log("wait")
     this.ticketRegService.getActivities(date)
       .subscribe(res => {
-        console.log(res)
+        this.activities = res;
+
+        if(this.activities.length > 0){
+          this.selectedWorkshift = this.workshifts.find(option => option.name === this.activities[0].user_workshift)
+          console.log(this.selectedWorkshift)
+        } else {
+          this.selectedWorkshift = null;
+        }
       })
     //--TODO: Cambiar inicializar workshift--//
+  }
+  getActivitiesOnChangeDate(){
+    if(this.date){
+      this.getAllActivitiesDay(this.date)
+    }
   }
 
 }

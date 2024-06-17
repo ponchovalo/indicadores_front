@@ -27,8 +27,9 @@ export class TicketRegService {
 
   //-- Obtener Actividades --//
   getActivities(date: Date): Observable<Activity[]>{
-    const url = `${this.baseUrl}/activities/forday`;
-    const body = {date}
+    const dateString: String = date.toLocaleDateString("en-CA")
+    const url = `${this.baseUrl}/activities/fordate`;
+    const body = {date: dateString, user_name: "VALENZUELA LOPEZ ILDEFONSO"}
     return this.http.post<Activity[]>(url, body)
   }
 
